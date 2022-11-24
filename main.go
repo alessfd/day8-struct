@@ -20,9 +20,9 @@ func main() {
 	route.HandleFunc("/project/{id}", projectDetail).Methods("GET")
 	route.HandleFunc("/addproject", addProject).Methods("GET")
 	route.HandleFunc("/submitproject", submitProject).Methods("POST")
-	route.HandleFunc("/deleteproject/{id}", deleteProject).Methods("GET")
 	route.HandleFunc("/editproject/{id}", editProject).Methods("GET")
 	route.HandleFunc("/submitedit", submitEdit).Methods("POST")
+	route.HandleFunc("/deleteproject/{id}", deleteProject).Methods("GET")
 
 	port := "5000"
 
@@ -191,11 +191,11 @@ func projectDetail(w http.ResponseWriter, r *http.Request) {
 // Delete Project
 func deleteProject(w http.ResponseWriter, r *http.Request) {
 
-	index, _ := strconv.Atoi(mux.Vars(r)["id"])
+	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 
-	// fmt.Println(index)
+	fmt.Println(id)
 
-	projects = append(projects[:index], projects[index+1:]...)
+	projects = append(projects[:id], projects[id+1:]...)
 
 	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
